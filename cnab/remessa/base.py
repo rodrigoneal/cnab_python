@@ -36,7 +36,6 @@ class RemessaBase:
         dv_verificador: TypesField,
         nome_empresa: TypesField,
         nome_banco: TypesField,
-        codigo_arquivo: TypesField,
     ):
         self.codigo_banco = NumericoField(
             **criar_parametros(codigo_banco),
@@ -109,7 +108,6 @@ class RemessaBase:
         )
         self.codigo_arquivo = NumericoField(
             padrao="1",
-            **criar_parametros(codigo_arquivo),
             inicio=143,
             tamanho=1,
             nome_campo="codigo_arquivo",

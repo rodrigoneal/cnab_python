@@ -14,11 +14,6 @@ def test_se_passar_um_valor_numerico_invalido_para_um_campo():
         NumericoField(nome_campo="numero", value="abc", tamanho=9, inicio=9)
 
 
-def test_se_passar_um_tamanho_invalido_para_um_campo():
-    with pytest.raises(IsnotValidFieldException):
-        NumericoField(nome_campo="numero", value="123", tamanho=10, inicio=9, strict=True)
-
-
 def test_se_preencher_o_campo_automaticamente_com_valor_numerico_correto():
     field = NumericoField(nome_campo="numero", value="1", tamanho=9, inicio=9)
     assert field.value == "000000001"

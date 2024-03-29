@@ -24,23 +24,19 @@ class BaseField:
         self.strict = strict
         self.subclass_name = self.__class__.__name__
         self.nome_campo = nome_campo
-        self.check_field()
         self.fill_field()
+        self.check_field()
 
     def __check_numerico(self, valor):
-        if self.strict:
-            if not valor.isdigit():
-                raise IsnotValidFieldException(
-                    message=f"O valor {self.value} não é um valor numérico válido"
-                )
-            if not len(self.value) == self.tamanho:
-                raise IsnotValidFieldException(
-                    message=f"O valor {self.value} deve ter {self.tamanho} dígitos"
-                )
         if not valor.isdigit():
             raise IsnotValidFieldException(
                 message=f"O valor {self.value} não é um valor numérico válido"
             )
+        if not len(self.value) == self.tamanho:
+            raise IsnotValidFieldException(
+                message=f"O campo {self.nome_campo} deve ter {self.tamanho} dígitos, mas foi dado {len(self.value)}"
+            )
+
 
     def check_field(self):
         valor = self.value or self.padrao
@@ -51,11 +47,10 @@ class BaseField:
         if self.subclass_name == "NumericoField":
             self.__check_numerico(valor)
         elif self.subclass_name == "AlpanumericoField":
-            if self.strict:
-                if not len(valor) == self.tamanho:
-                    raise IsnotValidFieldException(
-                        message=f"O valor {valor} deve ter {self.tamanho} caracteres para o campo {self.nome_campo}"
-                    )
+            if not len(valor) == self.tamanho:
+                raise IsnotValidFieldException(
+                    message=f"O valor {valor} deve ter {self.tamanho} caracteres para o campo {self.nome_campo}"
+                )
 
     def fill_field(self):
         valor = self.value or self.padrao

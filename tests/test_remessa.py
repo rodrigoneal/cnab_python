@@ -14,7 +14,6 @@ def test_remessa_base():
         9,
         10,
         11,
-        12,
 
 
     )
