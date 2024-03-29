@@ -13,6 +13,11 @@ pytest = "^8.1.1"
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.9.0"
 
+
+[tool.poetry.group.linter.dependencies]
+isort = "^5.13.2"
+ruff = "^0.3.4"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

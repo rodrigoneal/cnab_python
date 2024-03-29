@@ -1,5 +1,4 @@
-from typing import TypeVar, TypedDict
-
+from typing import TypedDict, TypeVar
 
 DictField = TypedDict("DictField", {"value": str, "strict": bool})
 

@@ -1,6 +1,7 @@
 from datetime import datetime
+
 from cnab.core.fields import AlpanumericoField, NumericoField
-from cnab.core.types.field_types import TypesField, DictField
+from cnab.core.types.field_types import DictField, TypesField
 
 
 def criar_parametros(valor: TypesField) -> DictField:
@@ -13,8 +14,35 @@ def criar_parametros(valor: TypesField) -> DictField:
     else:
         return {"value": str(valor), "strict": False}
 
+
 class HeaderArquivo:
-    fields = ["codigo_banco", "lote_servico", "tipo_registro","cnab_1", "tipo_inscricao", "numero_inscricao","codigo_convenio", "codigo_agencia", "dv_agencia", "numero_conta", "dv_conta", "dv_verificador", "nome_empresa","nome_banco","cnab_2", "codigo_arquivo", "data_geracao", "hora_geracao", "numero_sequencial", "layout_arquivo", "densidade_arquivo", "cnab_3", "cnab_4", "cnab_5"]
+    fields = [
+        "codigo_banco",
+        "lote_servico",
+        "tipo_registro",
+        "cnab_1",
+        "tipo_inscricao",
+        "numero_inscricao",
+        "codigo_convenio",
+        "codigo_agencia",
+        "dv_agencia",
+        "numero_conta",
+        "dv_conta",
+        "dv_verificador",
+        "nome_empresa",
+        "nome_banco",
+        "cnab_2",
+        "codigo_arquivo",
+        "data_geracao",
+        "hora_geracao",
+        "numero_sequencial",
+        "layout_arquivo",
+        "densidade_arquivo",
+        "cnab_3",
+        "cnab_4",
+        "cnab_5",
+    ]
+
 
 class RemessaBase:
     cnab_1 = AlpanumericoField(nome_campo="cnab_1", padrao=" ", tamanho=9, inicio=9)

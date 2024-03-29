@@ -1,5 +1,7 @@
 from datetime import datetime
+
 import pytest
+
 from cnab.core.fields import AlpanumericoField, NumericoField
 from cnab.exceptions_custom.fields_exceptions import IsnotValidFieldException
 

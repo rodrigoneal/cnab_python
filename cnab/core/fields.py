@@ -37,7 +37,6 @@ class BaseField:
                 message=f"O campo {self.nome_campo} deve ter {self.tamanho} dígitos, mas foi dado {len(self.value)}"
             )
 
-
     def check_field(self):
         valor = self.value or self.padrao
         if not valor:
