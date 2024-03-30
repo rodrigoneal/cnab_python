@@ -2,7 +2,7 @@ from datetime import datetime
 
 import pytest
 
-from cnab.core.fields import AlpanumericoField, NumericoField
+from cnab.core.fields import AlphanumericoField, NumericoField
 from cnab.exceptions_custom.fields_exceptions import IsnotValidFieldException
 
 
@@ -23,8 +23,8 @@ def test_se_preencher_o_campo_automaticamente_com_valor_numerico_correto():
 
 
 def test_se_preencher_o_campo_com_valor_alpanumerico_correto():
-    field = AlpanumericoField(nome_campo="numero", value="abc", tamanho=9, inicio=9)
-    assert field.value == "abc      "
+    field = AlphanumericoField(nome_campo="numero", value="abc", tamanho=9, inicio=9)
+    assert field.value == "ABC      "
     assert len(field.value) == 9
 
 
@@ -33,7 +33,6 @@ def test_se_chamar_funcao_para_preencher_o_campo_automaticamente_com_valor_numer
         nome_campo="numero",
         tamanho=6,
         inicio=9,
-        strict=True,
         funcao=lambda: datetime.now().strftime("%H%M%S"),
     )
     agora = datetime.now().strftime("%H%M%S")

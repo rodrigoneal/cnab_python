@@ -1,5 +1,11 @@
-from typing import TypedDict, TypeVar
+class NumericoFieldType:
+    def __init__(self, tamanho: int, inicio: int):
+        pass
 
-DictField = TypedDict("DictField", {"value": str, "strict": bool})
+    def juca(self):
+        pass
 
-TypesField = TypeVar("TypesField", str, DictField)
+
+class AlphanumericoFieldType:
+    def __init__(self, tamanho: int, inicio: int):
+        pass

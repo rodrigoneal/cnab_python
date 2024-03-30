@@ -11,7 +11,6 @@ class BaseField:
         nome_campo: str,
         value: Optional[str] = None,
         padrao: Optional[str] = None,
-        strict: bool = False,
         funcao: Optional[Callable] = None,
     ):
         if funcao:
@@ -21,7 +20,6 @@ class BaseField:
         self.tamanho = tamanho
         self.inicio = inicio
         self.fim = inicio + (tamanho - 1)
-        self.strict = strict
         self.subclass_name = self.__class__.__name__
         self.nome_campo = nome_campo
         self.fill_field()
@@ -53,10 +51,11 @@ class BaseField:
 
     def fill_field(self):
         valor = self.value or self.padrao
+        valor = str(valor).upper()
         if len(valor) < self.tamanho:
             if self.subclass_name == "NumericoField":
                 self.value = valor.zfill(self.tamanho)
-            elif self.subclass_name == "AlpanumericoField":
+            elif self.subclass_name == "AlphanumericoField":
                 self.value = valor.ljust(self.tamanho)
         else:
             self.value = valor
@@ -71,7 +70,6 @@ class NumericoField(BaseField):
         value: Optional[str] = None,
         padrao: Optional[str] = None,
         num_decimal: int = 0,
-        strict: bool = False,
         funcao: Optional[Callable] = None,
     ):
         self.num_decimal = num_decimal
@@ -80,13 +78,12 @@ class NumericoField(BaseField):
             tamanho=tamanho,
             inicio=inicio,
             padrao=padrao,
-            strict=strict,
             funcao=funcao,
             nome_campo=nome_campo,
         )
 
 
-class AlpanumericoField(BaseField):
+class AlphanumericoField(BaseField):
     def __init__(
         self,
         tamanho: int,
@@ -94,21 +91,18 @@ class AlpanumericoField(BaseField):
         nome_campo: str,
         padrao: Optional[str] = None,
         value: Optional[str] = None,
-        strict: bool = False,
         funcao: Optional[Callable] = None,
     ):
         self.value = value
         self.padrao = padrao
         self.tamanho = tamanho
         self.inicio = inicio
-        self.strict = strict
 
         super().__init__(
             value=value,
             tamanho=tamanho,
             inicio=inicio,
             padrao=padrao,
-            strict=strict,
             funcao=funcao,
             nome_campo=nome_campo,
         )
