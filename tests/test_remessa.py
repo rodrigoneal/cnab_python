@@ -38,9 +38,12 @@ def test_se_ajeitar_o_campo_automaticamente_com_valor_alpanumerico_correto(valor
 
 
 def test_remessa_base(remessa):
-    assert len(str(remessa)) == 240
+    assert len(remessa.texto()) == 240
 
+def test_se_remessa_comecao_com_banco_correto(remessa):
+    assert remessa.texto()[0:3] == "001"
 
 def test_remessa_base_trailer():
     trailer = TrailerRemessaBase(codigo_banco="001", quantidade_lotes="1")
     assert len(str(trailer)) == 240
+

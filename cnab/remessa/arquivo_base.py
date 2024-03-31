@@ -4,7 +4,7 @@ from cnab.core.common.dominio import TipoRegisto
 from cnab.core.fields import AlphanumericoField, NumericoField
 
 
-class HeaderArquivo:
+class HeaderArquivoFields:
     fields = [
         "codigo_banco",
         "lote_servico",
@@ -53,6 +53,7 @@ class RemessaBase:
     cnab_4 = AlphanumericoField(nome_campo="cnab_5", padrao=" ", tamanho=20, inicio=192)
     cnab_5 = AlphanumericoField(nome_campo="cnab_6", padrao=" ", tamanho=29, inicio=212)
 
+    fields = HeaderArquivoFields.fields
     def __init__(
         self,
         *,
@@ -170,11 +171,15 @@ class RemessaBase:
             padrao="00000", inicio=167, tamanho=5, nome_campo="densidade_arquivo"
         )
 
-    def __str__(self):
+    def texto(self):
         valor = ""
-        for field in HeaderArquivo.fields:
+        for field in self.fields:
             valor += getattr(self, field).value
         return valor
+
+    def __str__(self):
+        return self.texto()
+        
 
 
 class TrailerRemessaBase:

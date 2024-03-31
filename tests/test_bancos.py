@@ -12,7 +12,7 @@ def test_se_o_banco_itau_emite_o_arquivo_correto():
         dv_verificador="7",
         nome_empresa="Teste",
     )
-    assert len(str(remessa)) == 240
+    assert len(remessa.texto()) == 240
 
 
 def test_se_o_banco_bradesco_emite_o_arquivo_correto():
@@ -29,4 +29,4 @@ def test_se_o_banco_bradesco_emite_o_arquivo_correto():
         dv_verificador="7",
         nome_empresa="Teste",
     )
-    assert len(str(remessa)) == 240
+    assert len(remessa.texto()) == 240

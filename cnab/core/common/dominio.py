@@ -20,3 +20,17 @@ class TipoInscricao:
     CNPJ = "2"
     PIS = "3"
     OUTROS = "9"
+
+class TipoOperacao:
+    LANCAMENTO_CREDITO = "C"
+    LANCAMENTO_DEBITO = "D"
+    EXTRATO_CONCILIACAO = "E"
+    EXTRATO_GESTAO_CAIXA = "G"
+    INFORMACOES_TITULOS = "I"
+    ARQUIVO_REMESSA = "R"
+    ARQUIVO_RETORNO = "T"
+
+class FormaPagamento:
+    CONTA_CORRENTE = "01"
+    EMPRESTIMO = "02"
+    CAETAO_CREDITO = "03"

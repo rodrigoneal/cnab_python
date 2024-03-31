@@ -3,6 +3,9 @@ from cnab.core.fields import AlphanumericoField, NumericoField
 
 
 class HeaderLotePagamento:
+    cnab_1 = AlphanumericoField(padrao=" ", inicio=17, tamanho=1, nome_campo="cnab_1")
+    cnab_2 = AlphanumericoField(padrao=" ", inicio=225, tamanho=6, nome_campo="cnab_2")
+
     def __init__(
         self,
         *,
