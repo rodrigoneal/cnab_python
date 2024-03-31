@@ -22,7 +22,7 @@ class HeaderLote:
             value=lote_servico, nome_campo="lote_servico", inicio=4, tamanho=4
         )
         self.tipo_registro = NumericoField(
-            TipoRegisto.HEADER_LOTE,
+            value=TipoRegisto.HEADER_LOTE,
             inicio=8,
             tamanho=1,
             nome_campo="tipo_registro",
