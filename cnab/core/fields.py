@@ -82,6 +82,16 @@ class NumericoField(BaseField):
             nome_campo=nome_campo,
         )
 
+        self.check_decimal_number()
+
+    def check_decimal_number(self):
+        if self.num_decimal > 0:
+            str(self.value).split(".")[1]
+            if len(str(self.value).split(".")[1]) != self.num_decimal:
+                raise IsnotValidFieldException(
+                    message=f"O campo {self.nome_campo} deve ter {self.num_decimal} dígitos decimais"
+                )
+
 
 class AlphanumericoField(BaseField):
     def __init__(

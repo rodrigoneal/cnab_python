@@ -1,59 +1,20 @@
 from datetime import datetime
 
+from cnab.core.abstract.abstract_remessa import AbstractRemessa
 from cnab.core.common.dominio import TipoRegisto
 from cnab.core.fields import AlphanumericoField, NumericoField
+from cnab.remessa.fields import HeaderArquivoFields, TrailerArquivoFields
 
 
-class HeaderArquivoFields:
-    fields = [
-        "codigo_banco",
-        "lote_servico",
-        "tipo_registro",
-        "cnab_1",
-        "tipo_inscricao",
-        "numero_inscricao",
-        "codigo_convenio",
-        "codigo_agencia",
-        "dv_agencia",
-        "numero_conta",
-        "dv_conta",
-        "dv_verificador",
-        "nome_empresa",
-        "nome_banco",
-        "cnab_2",
-        "codigo_arquivo",
-        "data_geracao",
-        "hora_geracao",
-        "numero_sequencial",
-        "layout_arquivo",
-        "densidade_arquivo",
-        "cnab_3",
-        "cnab_4",
-        "cnab_5",
-    ]
-
-
-class TrailerArquivo:
-    fields = [
-        "codigo_banco",
-        "lote_servico",
-        "tipo_registro",
-        "cnab_1",
-        "quantidade_lotes",
-        "quantidade_registros",
-        "quantidade_contas",
-        "cnab_2",
-    ]
-
-
-class RemessaBase:
+class RemessaBase(AbstractRemessa):
     cnab_1 = AlphanumericoField(nome_campo="cnab_1", padrao=" ", tamanho=9, inicio=9)
     cnab_2 = AlphanumericoField(nome_campo="cnab_2", padrao=" ", tamanho=10, inicio=133)
     cnab_3 = AlphanumericoField(nome_campo="cnab_4", padrao=" ", tamanho=20, inicio=172)
     cnab_4 = AlphanumericoField(nome_campo="cnab_5", padrao=" ", tamanho=20, inicio=192)
     cnab_5 = AlphanumericoField(nome_campo="cnab_6", padrao=" ", tamanho=29, inicio=212)
 
-    fields = HeaderArquivoFields.fields
+    fields = HeaderArquivoFields()
+
     def __init__(
         self,
         *,
@@ -171,20 +132,12 @@ class RemessaBase:
             padrao="00000", inicio=167, tamanho=5, nome_campo="densidade_arquivo"
         )
 
-    def texto(self):
-        valor = ""
-        for field in self.fields:
-            valor += getattr(self, field).value
-        return valor
 
-    def __str__(self):
-        return self.texto()
-        
-
-
-class TrailerRemessaBase:
+class TrailerRemessaBase(AbstractRemessa):
     cnab_1 = AlphanumericoField(padrao=" ", inicio=9, tamanho=9, nome_campo="cnab_1")
     cnab_2 = AlphanumericoField(padrao=" ", inicio=36, tamanho=205, nome_campo="cnab_2")
+
+    fields = TrailerArquivoFields()
 
     def __init__(self, *, codigo_banco: str, quantidade_lotes: str) -> None:
         self.codigo_banco = NumericoField(
@@ -215,9 +168,3 @@ class TrailerRemessaBase:
         self.quantidade_contas = NumericoField(
             padrao="0", inicio=30, tamanho=6, nome_campo="quantidade_contas"
         )
-
-    def __str__(self):
-        valor = ""
-        for field in TrailerArquivo.fields:
-            valor += getattr(self, field).value
-        return valor
